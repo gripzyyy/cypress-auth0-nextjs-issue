@@ -1,29 +1,6 @@
 /// <reference types="cypress" />
 
 declare namespace Cypress {
-    import { authService } from "../src/machines/authMachine";
-    import { createTransactionService } from "../src/machines/createTransactionMachine";
-    import { publicTransactionService } from "../src/machines/publicTransactionsMachine";
-    import { contactsTransactionService } from "../src/machines/contactsTransactionsMachine";
-    import { personalTransactionService } from "../src/machines/personalTransactionsMachine";
-    import {
-      User,
-      BankAccount,
-      Like,
-      Comment,
-      Transaction,
-      BankTransfer,
-      Contact,
-    } from "../src/models";
-  
-    interface CustomWindow extends Window {
-      authService: typeof authService;
-      createTransactionService: typeof createTransactionService;
-      publicTransactionService: typeof publicTransactionService;
-      contactTransactionService: typeof contactsTransactionService;
-      personalTransactionService: typeof personalTransactionService;
-    }
-  
     type dbQueryArg = {
       entity: string;
       query: object | [object];
@@ -37,7 +14,7 @@ declare namespace Cypress {
       /**
        *  Window object with additional properties used during test.
        */
-      window(options?: Partial<Loggable & Timeoutable>): Chainable<CustomWindow>;
+      window(options?: Partial<Loggable & Timeoutable>): Chainable<any>;
   
       /**
        * Custom command to make taking Percy snapshots with full name formed from the test title + suffix easier
@@ -119,26 +96,6 @@ declare namespace Cypress {
         password: string,
         loginOptions?: LoginOptions
       ): void;
-  
-      /**
-       * Logs-in user by using API request
-       */
-      loginByApi(username: string, password?: string): Chainable<Response>;
-  
-      /**
-       * Logs-in user by using Google API request
-       */
-      loginByGoogleApi(): Chainable<Response>;
-  
-      /**
-       * Logs-in user by using Okta API request
-       */
-      loginByOktaApi(username: string, password?: string): Chainable<Response>;
-  
-      /**
-       * Logs-in user by navigating to Okta tenant with cy.origin()
-       */
-      loginByOkta(username: string, password: string): Chainable<Response>;
   
       /**
        * Logs in bypassing UI by triggering XState login event

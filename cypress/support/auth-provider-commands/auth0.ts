@@ -1,7 +1,7 @@
 function loginViaAuth0Ui(username: string, password: string) {
     // App landing page redirects to Auth0.
     cy.visit('/')
-    cy.wait(5000)
+    
     // Login on Auth0.
     cy.origin(
       Cypress.env('auth0_domain'),
